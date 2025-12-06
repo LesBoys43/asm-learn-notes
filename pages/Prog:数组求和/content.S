@@ -8,8 +8,8 @@ section .text
 	global _start
 
 _start:
-	mov rcx, data
-	mov rdx, len
+	mov rcx, len
+	mov rdx, data
 	mov rax, rcx
 	mov rbx, 0
 	cmp rdx, 0
