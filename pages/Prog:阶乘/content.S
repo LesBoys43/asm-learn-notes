@@ -8,7 +8,7 @@ section .text
 
 _start:
 	movzx rdx, word [val]
-	mov rbx, 0
+	mov rbx, 1
 	mov rax, rdx
 	cmp rdx, 21
 	jg stop
