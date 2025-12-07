@@ -36,7 +36,7 @@ jobs:
         run: 'echo "OUTFILES=$(php scripts/glob-outfile.php)" > $GITHUB_ENV'
 
       - name: Archive output files
-        run: '7za a -an -bd -snl -spd out.7z $OUTFILES'
+        run: '7za a -t7z -bd -snl -spd out.7z $OUTFILES'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v5.0.0
