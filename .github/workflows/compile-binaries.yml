@@ -1,0 +1,45 @@
+on:
+  push:
+      branches:
+        - master
+      paths:
+        - pages/Prog:*/content.S
+  workflow_dispatch:
+
+jobs:
+  compile:
+    name: Compile all prog pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.1
+
+      - name: Setup PHP
+        uses: nanasess/setup-php@v4.0.2
+        with:
+          php-version: 7.4.4
+
+      - name: Setup NASM
+        uses: ilammy/setup-nasm@v1.5.1
+        with:
+          version: 3.01
+
+      - name: Setup 7z
+        uses: AnimMouse/setup-p7zip-fork@v2
+
+      - name: Execute compile script
+        run: 'php scripts/compile-app.php'
+
+      - name: Glob all output files
+        run: 'echo "OUTFILES=$(php scripts/glob-outfile.php)" > $GITHUB_ENV'
+
+      - name: Archive output files
+        run: '7za a -an -bd -snl -spd out.7z $OUTFILES'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          name: Binaries of all prog pages
+          path: out.7z
+      
