@@ -12,7 +12,7 @@ _start:
 	mov rdx, data
 	mov rax, rcx
 	mov rbx, 0
-	cmp rdx, 0
+	cmp rcx, 0
 	jz stop
 loop:
 	mov r8, rcx
