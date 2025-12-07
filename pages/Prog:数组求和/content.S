@@ -14,7 +14,7 @@ _start:
 	mov rbx, 0
 	cmp rdx, 0
 	jz stop
-	loop:
+loop:
 	mov r8, rcx
 	sub r8, rax
 	shl r8, 1
@@ -25,5 +25,5 @@ _start:
 	cmp rax, 0
 	jle stop
 	jmp loop
-	stop:
+stop:
 	int 3
