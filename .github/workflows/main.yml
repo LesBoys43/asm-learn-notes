@@ -63,8 +63,8 @@ jobs:
         with:
           version: 3.01
 
-      - name: Setup 7z
-        uses: AnimMouse/setup-p7zip-fork@v2
+      - name: Setup GDB
+        run: 'sudo apt-get install -y gdb'
 
       - name: Compile all prog pages
         run: 'php scripts/compile-all.php'
