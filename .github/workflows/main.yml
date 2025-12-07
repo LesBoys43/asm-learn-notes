@@ -44,3 +44,30 @@ jobs:
           name: Binaries of all prog pages
           path: out.7z
 
+  test:
+    name: Test all prog pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.1
+
+      # - name: Hotfix for a setup-php bug
+      #   run: 'sudo ln -sf $(which apt-get) /usr/bin/apt-fast'
+
+      - name: Setup PHP
+        run: 'sudo apt-get install -y php'
+
+      - name: Setup NASM
+        uses: ilammy/setup-nasm@v1.5.1
+        with:
+          version: 3.01
+
+      - name: Setup 7z
+        uses: AnimMouse/setup-p7zip-fork@v2
+
+      - name: Compile all prog pages
+        run: 'php scripts/compile-all.php'
+
+      - name: Test and save report
+        run: 'php scripts/test.php > $GITHUB_STEP_SUMMARY'
