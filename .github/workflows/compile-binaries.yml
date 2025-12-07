@@ -30,7 +30,7 @@ jobs:
         uses: AnimMouse/setup-p7zip-fork@v2
 
       - name: Execute compile script
-        run: 'php scripts/compile-app.php'
+        run: 'php scripts/compile-all.php'
 
       - name: Glob all output files
         run: 'echo "OUTFILES=$(php scripts/glob-outfile.php)" > $GITHUB_ENV'
