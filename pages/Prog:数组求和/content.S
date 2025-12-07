@@ -26,4 +26,4 @@ _start:
 	jle stop
 	jmp loop
 	stop:
-	ret
+	int 3
