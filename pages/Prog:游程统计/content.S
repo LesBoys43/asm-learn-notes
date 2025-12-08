@@ -13,9 +13,8 @@ _start:
 	mov rcx, 64
 loop:
 	mov r8, rdx
-	mov r9, 1
-	shl r9, rcx
-	and r8, r9
+	shr r8, rcx
+	and r8, 1
 	cmp r8, rax
 	jne inc_run
 	jmp loop_cb
