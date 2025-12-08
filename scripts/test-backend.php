@@ -1,7 +1,7 @@
 <?php
 function test_one($prog) {
 	chdir("pages/Prog:$prog");
-	$cmd = "echo -e \"run\\ninfo registers\" | gdb ./app 2>&1 | grep rbx | sed -e 's/\s\+/ /g' | cut -d' ' -f3 > /tmp/{$prog}_rbx.txt";
+	$cmd = "/bin/echo -e \"run\\ninfo registers\" | gdb ./app 2>&1 | grep rbx | sed -e 's/\s\+/ /g' | cut -d' ' -f3 > /tmp/{$prog}_rbx.txt";
 	system($cmd);
 	$actual = trim(file_get_contents("/tmp/{$prog}_rbx.txt"));
 	$excepted = trim(file_get_contents("excepted_rbx_val.txt"));
