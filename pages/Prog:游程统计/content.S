@@ -9,7 +9,10 @@ section .text
 _start:
 	mov rdx, [val]
 	mov rbx, 0
-	mov rax, 0
+	mov r9, rdx
+	shr r9, 64
+	and r9, 1
+	mov rax, r9
 	mov rcx, 64
 loop:
 	mov r8, rdx
