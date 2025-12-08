@@ -14,6 +14,7 @@ foreach ($progs as $prog) {
 	system($cmd, $rv);
 	if ($rv != 0) {
 		trigger_error("程序 $prog_name 未能成功编译", E_USER_NOTICE);
+		chdir("../../");
 		continue;
 	}
 	trigger_error("程序 $prog_name 成功编译", E_USER_NOTICE);
@@ -21,6 +22,7 @@ foreach ($progs as $prog) {
 	system($cmd, $rv);
 	if ($rv != 0) {
 		trigger_error("程序 $prog_name 未能成功链接", E_USER_NOTICE);
+		chdir("../../");
 		continue;
 	}
 	trigger_error("程序 $prog_name 成功链接", E_USER_NOTICE);
