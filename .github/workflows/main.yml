@@ -76,3 +76,6 @@ jobs:
 
       - name: Test and save report
         run: 'php scripts/test.php > $GITHUB_STEP_SUMMARY'
+
+      - name: Fail workflow when test fail
+        run: 'php scripts/fail-if-test-fail.php'
