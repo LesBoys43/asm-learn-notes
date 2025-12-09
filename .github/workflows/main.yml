@@ -79,6 +79,9 @@ jobs:
       - name: Switch local settings variant
         run: 'mv scripts/localsettings.php.${{ matrix.localsettings_variant }} scripts/localsettings'
 
+      - name: Switch testcase
+        run: 'php scripts/switch-testcase-all.php ${{ matrix.testcase }}'
+
       - name: Compile all prog pages
         run: 'php scripts/compile-all.php'
 
@@ -89,9 +92,6 @@ jobs:
 
       - name: Reset workspace
         run: 'git reset --hard'
-
-      - name: Switch testcase
-        run: 'php scripts/switch-testcase-all.php ${{ matrix.testcase }}'
 
       - name: Test and save report
         run: 'php scripts/test.php | sed -e ''s/测试报告/测试报告 (编译配置变体: ${{ matrix.localsettings_variant }}, 测试用例变体: ${{ matrix.testcase }})/''> $GITHUB_STEP_SUMMARY'
