@@ -51,7 +51,7 @@ jobs:
       matrix:
         localsettings_variant:
           - default
-          - 2
+          - o2-opti
         testcase:
           - 1
           - 2
