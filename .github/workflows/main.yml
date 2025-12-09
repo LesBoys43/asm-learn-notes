@@ -47,6 +47,7 @@ jobs:
   test:
     name: Test all prog pages
     strategy:
+      fail-fast: false
       matrix:
         localsettings_variant:
           - default
@@ -87,7 +88,7 @@ jobs:
       #     limit-access-to-actor: false
 
       - name: Switch testcase
-        run: 'php scripts/switch-testcases-all.php ${{ matrix.testcase }}'
+        run: 'php scripts/switch-testcase-all.php ${{ matrix.testcase }}'
 
       - name: Test and save report
         run: 'php scripts/test.php | sed -e ''s/测试报告/测试报告 (编译配置变体: ${{ matrix.localsettings_variant }}, 测试用例变体: ${{ matrix.testcase }})/''> $GITHUB_STEP_SUMMARY'
