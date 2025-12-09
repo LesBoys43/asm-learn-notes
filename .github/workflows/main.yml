@@ -87,6 +87,9 @@ jobs:
       #   with:
       #     limit-access-to-actor: false
 
+      - name: Reset workspace
+        run: 'git reset --hard'
+
       - name: Switch testcase
         run: 'php scripts/switch-testcase-all.php ${{ matrix.testcase }}'
 
