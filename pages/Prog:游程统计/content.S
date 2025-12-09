@@ -10,10 +10,10 @@ _start:
 	mov rdx, [val]
 	mov rbx, 0
 	mov r9, rdx
-	shr r9, 64
+	shr r9, 63
 	and r9, 1
 	mov rax, r9
-	mov rcx, 64
+	mov rcx, 63
 loop:
 	mov r8, rdx
 	shr r8, rcx
