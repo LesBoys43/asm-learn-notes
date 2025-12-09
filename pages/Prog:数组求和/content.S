@@ -1,7 +1,7 @@
 BITS 64
 
 section .data
-    data: dw 1, 2, 3
+    data: dw 1,2,3
     len:  dq 3
 
 section .text
