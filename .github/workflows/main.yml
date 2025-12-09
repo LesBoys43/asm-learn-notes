@@ -76,6 +76,9 @@ jobs:
       - name: Setup GDB
         run: 'sudo apt-get install -y gdb'
 
+      - name: Reset workspace
+        run: 'git reset --hard'
+
       - name: Switch local settings variant
         run: 'mv scripts/localsettings.php.${{ matrix.localsettings_variant }} scripts/localsettings'
 
@@ -89,9 +92,6 @@ jobs:
       #   uses: mxschmitt/action-tmate@v3
       #   with:
       #     limit-access-to-actor: false
-
-      - name: Reset workspace
-        run: 'git reset --hard'
 
       - name: Test and save report
         run: 'php scripts/test.php | sed -e ''s/测试报告/测试报告 (编译配置变体: ${{ matrix.localsettings_variant }}, 测试用例变体: ${{ matrix.testcase }})/''> $GITHUB_STEP_SUMMARY'
