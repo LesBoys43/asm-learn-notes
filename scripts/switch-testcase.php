@@ -5,6 +5,8 @@ chdir("pages/Prog:$prog");
 include 'testcases.php';
 if (isset($testcases[$tc])) {
 	file_put_contents('excepted_rbx_val.txt', $testcases[$tc]['excepted_rbx_val']);
-	system("sed content.S -i -e s/$testcases[$tc]['content_S_sed_pattern'][0]/$testcases[$tc]['content_S_sed_pattern'][1]/");
+	$src = testcases[$tc]['content_S_sed_pattern'][0];
+	$dest = testcases[$tc]['content_S_sed_pattern'][1];
+	system("sed content.S -i -e 's/$src/$dest/'");
 }
 chdir("../../");
