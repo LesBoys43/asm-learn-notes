@@ -46,6 +46,15 @@ jobs:
 
   test:
     name: Test all prog pages
+    strategy:
+      matrix:
+        localsettings_variant:
+          - default
+          - 2
+        testcase:
+          - 1
+          - 2
+          - 3
     runs-on: ubuntu-latest
 
     steps:
@@ -66,6 +75,9 @@ jobs:
       - name: Setup GDB
         run: 'sudo apt-get install -y gdb'
 
+      - name: Switch local settings variant
+        run: 'mv scripts/localsettings.php.${{ matrix.localsettings_variant }} scripts/localsettings'
+
       - name: Compile all prog pages
         run: 'php scripts/compile-all.php'
 
@@ -74,8 +86,11 @@ jobs:
       #   with:
       #     limit-access-to-actor: false
 
+      - name: Switch testcase
+        run: 'php scripts/switch-testcases-all.php ${{ matrix.testcase }}'
+
       - name: Test and save report
-        run: 'php scripts/test.php > $GITHUB_STEP_SUMMARY'
+        run: 'php scripts/test.php | sed -e ''s/测试报告/测试报告 (编译配置变体: ${{ matrix.localsettings_variant }}, 测试用例变体: ${{ matrix.testcase }})/''> $GITHUB_STEP_SUMMARY'
 
       - name: Fail workflow when test fail
         run: 'php scripts/fail-if-test-fail.php'
